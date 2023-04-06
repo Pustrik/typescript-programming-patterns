@@ -1,5 +1,6 @@
 import {Singleton} from "./singleton";
 import {FactoryExample} from "./factory";
+import {FactoryCreator} from "./abstract-factory";
 
 async function bootstrap() {
         // Singleton programming pattern
@@ -25,6 +26,15 @@ async function bootstrap() {
         console.log(`Second product: ` + product2.assemble());
         console.log();
 
+        // Abstract factory programming pattern
+        console.log(`Abstract Factory pattern: `);
+        const factoryCreator = new FactoryCreator();
+        const factory1 = factoryCreator.creator(1);
+        const factory2 = factoryCreator.creator(2);
 
+        console.log(`First product: ` + factory1.creator(1));
+        console.log(`Second product: ` + factory1.creator(2));
+        console.log(`First product: ` + factory2.creator(1));
+        console.log(`Second product: ` + factory2.creator(2));
 }
 bootstrap();
