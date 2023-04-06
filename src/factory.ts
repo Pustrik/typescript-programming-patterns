@@ -28,6 +28,5 @@ export class FactoryExample implements Factory{
             default:
                 return null;
         }
-
     }
 }
