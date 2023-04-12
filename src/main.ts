@@ -1,6 +1,7 @@
 import {Singleton} from "./singleton";
 import {FactoryExample} from "./factory";
 import {FactoryCreator} from "./abstract-factory";
+import {Builder, Director} from "./builder";
 
 async function bootstrap() {
         // Singleton programming pattern
@@ -11,7 +12,6 @@ async function bootstrap() {
                 console.log(`Singleton instances is equal.`);
         else
                 console.log(`Singleton instances is not equal.`);
-
         Singleton.setPayload(8080);
         const singletonPayload = Singleton.getPayload();
         console.log(`Singleton payload: ` + singletonPayload);
@@ -31,10 +31,20 @@ async function bootstrap() {
         const factoryCreator = new FactoryCreator();
         const factory1 = factoryCreator.creator(1);
         const factory2 = factoryCreator.creator(2);
-
         console.log(`First product: ` + factory1.creator(1));
         console.log(`Second product: ` + factory1.creator(2));
         console.log(`First product: ` + factory2.creator(1));
         console.log(`Second product: ` + factory2.creator(2));
+        console.log();
+
+        // Builder programming pattern
+        console.log(`Builder pattern: `);
+        const builder = new Builder();
+        const director = new Director();
+        director.setBuilder(builder)
+        director.buildMin();
+        console.log(`Min building: ` + builder.getBuilding().showParts());
+        director.buildMax();
+        console.log(`Max building: ` + builder.getBuilding().showParts());
 }
 bootstrap();
