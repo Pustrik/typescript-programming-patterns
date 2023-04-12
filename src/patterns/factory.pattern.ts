@@ -2,7 +2,7 @@ interface Product {
     assemble(): string;
 }
 
-abstract class Factory {
+abstract class FactoryPattern {
     public abstract creator(index: number): Product;
 }
 
@@ -18,7 +18,7 @@ class SecondProduct implements Product {
     }
 }
 
-export class FactoryExample implements Factory{
+export class FactoryExample implements FactoryPattern{
     public creator(index: number): Product {
         switch (index) {
             case 1:
