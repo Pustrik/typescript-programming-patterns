@@ -1,11 +1,11 @@
-export class Singleton {
-    private static singletonInstance: Singleton;
+export class SingletonPattern {
+    private static singletonInstance: SingletonPattern;
     private static payload: number;
     private constructor() {}
 
-    public static getInstance(): Singleton {
+    public static getInstance(): SingletonPattern {
         if(!this.singletonInstance)
-            this.singletonInstance = new Singleton();
+            this.singletonInstance = new SingletonPattern();
 
         return this.singletonInstance;
     }

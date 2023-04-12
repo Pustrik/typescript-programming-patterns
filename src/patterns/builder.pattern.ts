@@ -1,4 +1,4 @@
-export class Builder {
+export class BuilderPattern {
     private building: Building;
 
     constructor() {
@@ -41,9 +41,9 @@ class Building {
 }
 
 export class Director {
-    private builder: Builder;
+    private builder: BuilderPattern;
 
-    public setBuilder(builder: Builder): void {
+    public setBuilder(builder: BuilderPattern): void {
         this.builder = builder;
     }
 

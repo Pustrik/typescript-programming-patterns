@@ -1,21 +1,22 @@
-import {Singleton} from "./patterns/singleton";
-import {FactoryExample} from "./patterns/factory";
-import {FactoryCreator} from "./patterns/abstract-factory";
-import {Builder, Director} from "./patterns/builder";
-import {Adapter, Handler, NotStandard, Standard} from "./patterns/adapter";
-import {AbstractImplementer, FirstImplementation, Implementer, SecondImplementation} from "./patterns/bridge";
+import {SingletonPattern} from "./patterns/singleton.pattern";
+import {FactoryExample} from "./patterns/factory.pattern";
+import {FactoryCreator} from "./patterns/abstract-factory.pattern";
+import {BuilderPattern, Director} from "./patterns/builder.pattern";
+import {AdapterPattern, Handler, NotStandard, Standard} from "./patterns/adapter.pattern";
+import {AbstractImplementer, FirstImplementation, Implementer, SecondImplementation} from "./patterns/bridge.pattern";
+import {FirstDecorator, SecondDecorator, SimpleComponent} from "./patterns/decorator.pattern";
 
 async function bootstrap() {
         //TODO Singleton programming pattern
         console.log(`Singleton pattern: `);
-        const singletonInstance1 = Singleton.getInstance()
-        const singletonInstance2 = Singleton.getInstance()
-        if(singletonInstance1 === singletonInstance2)
+        SingletonPattern.setPayload(8080);
+        const instance1 = SingletonPattern.getInstance()
+        const instance2 = SingletonPattern.getInstance()
+        const singletonPayload = SingletonPattern.getPayload();
+        if(instance1 === instance2)
                 console.log(`Singleton instances is equal.`);
         else
                 console.log(`Singleton instances is not equal.`);
-        Singleton.setPayload(8080);
-        const singletonPayload = Singleton.getPayload();
         console.log(`Singleton payload: ` + singletonPayload);
         console.log();
 
@@ -41,7 +42,7 @@ async function bootstrap() {
 
         //TODO Builder programming pattern
         console.log(`Builder pattern: `);
-        const builder = new Builder();
+        const builder = new BuilderPattern();
         const director = new Director();
         director.setBuilder(builder)
         director.buildMin();
@@ -57,7 +58,7 @@ async function bootstrap() {
         const notStandard = new NotStandard();
         handler.handle(standard)
         handler.handle(notStandard);
-        handler.handle(new Adapter(notStandard));
+        handler.handle(new AdapterPattern(notStandard));
         console.log();
 
         //TODO Bridge programming pattern
@@ -72,6 +73,11 @@ async function bootstrap() {
 
         //TODO Decorator programming pattern
         console.log(`Decorator pattern: `);
+        const component = new SimpleComponent();
+        const decorator1 = new FirstDecorator(component);
+        const decorator2 = new SecondDecorator(decorator1);
+        console.log(decorator1.operation());
+        console.log(decorator2.operation());
 
 }
 bootstrap();
