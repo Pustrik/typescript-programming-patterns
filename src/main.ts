@@ -1,11 +1,12 @@
-import {Singleton} from "./singleton";
-import {FactoryExample} from "./factory";
-import {FactoryCreator} from "./abstract-factory";
-import {Builder, Director} from "./builder";
-import {Adapter, Handler, NotStandard, Standard} from "./adapter";
+import {Singleton} from "./patterns/singleton";
+import {FactoryExample} from "./patterns/factory";
+import {FactoryCreator} from "./patterns/abstract-factory";
+import {Builder, Director} from "./patterns/builder";
+import {Adapter, Handler, NotStandard, Standard} from "./patterns/adapter";
+import {AbstractImplementer, FirstImplementation, Implementer, SecondImplementation} from "./patterns/bridge";
 
 async function bootstrap() {
-        // Singleton programming pattern
+        //TODO Singleton programming pattern
         console.log(`Singleton pattern: `);
         const singletonInstance1 = Singleton.getInstance()
         const singletonInstance2 = Singleton.getInstance()
@@ -18,7 +19,7 @@ async function bootstrap() {
         console.log(`Singleton payload: ` + singletonPayload);
         console.log();
 
-        // Factory programming pattern
+        //TODO Factory programming pattern
         console.log(`Factory pattern: `);
         const factory = new FactoryExample;
         const product1 = factory.creator(1);
@@ -27,7 +28,7 @@ async function bootstrap() {
         console.log(`Second product: ` + product2.assemble());
         console.log();
 
-        // Abstract factory programming pattern
+        //TODO Abstract factory programming pattern
         console.log(`Abstract Factory pattern: `);
         const factoryCreator = new FactoryCreator();
         const factory1 = factoryCreator.creator(1);
@@ -38,7 +39,7 @@ async function bootstrap() {
         console.log(`Second product: ` + factory2.creator(2));
         console.log();
 
-        // Builder programming pattern
+        //TODO Builder programming pattern
         console.log(`Builder pattern: `);
         const builder = new Builder();
         const director = new Director();
@@ -49,7 +50,7 @@ async function bootstrap() {
         console.log(`Max building: ` + builder.getBuilding().showParts());
         console.log();
 
-        // Adapter programming pattern
+        //TODO Adapter programming pattern
         console.log(`Adapter pattern: `);
         const handler = new Handler();
         const standard = new Standard();
@@ -58,5 +59,19 @@ async function bootstrap() {
         handler.handle(notStandard);
         handler.handle(new Adapter(notStandard));
         console.log();
+
+        //TODO Bridge programming pattern
+        console.log(`Bridge pattern: `);
+        const implementation1 = new FirstImplementation();
+        const implementation2 = new SecondImplementation();
+        const abstractImplementer = new AbstractImplementer(implementation1);
+        const implementer = new Implementer(implementation2);
+        console.log(abstractImplementer.operation());
+        console.log(implementer.operation());
+        console.log();
+
+        //TODO Decorator programming pattern
+        console.log(`Decorator pattern: `);
+
 }
 bootstrap();
