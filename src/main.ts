@@ -2,6 +2,7 @@ import {Singleton} from "./singleton";
 import {FactoryExample} from "./factory";
 import {FactoryCreator} from "./abstract-factory";
 import {Builder, Director} from "./builder";
+import {Adapter, Handler, NotStandard, Standard} from "./adapter";
 
 async function bootstrap() {
         // Singleton programming pattern
@@ -46,5 +47,16 @@ async function bootstrap() {
         console.log(`Min building: ` + builder.getBuilding().showParts());
         director.buildMax();
         console.log(`Max building: ` + builder.getBuilding().showParts());
+        console.log();
+
+        // Adapter programming pattern
+        console.log(`Adapter pattern: `);
+        const handler = new Handler();
+        const standard = new Standard();
+        const notStandard = new NotStandard();
+        handler.handle(standard)
+        handler.handle(notStandard);
+        handler.handle(new Adapter(notStandard));
+        console.log();
 }
 bootstrap();
