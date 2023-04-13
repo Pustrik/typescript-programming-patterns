@@ -1,12 +1,13 @@
-import {SingletonPattern} from "./patterns/singleton.pattern";
-import {FactoryExample} from "./patterns/factory.pattern";
-import {FactoryCreator} from "./patterns/abstract-factory.pattern";
-import {BuilderPattern, Director} from "./patterns/builder.pattern";
-import {AdapterPattern, Handler, NotStandard, Standard} from "./patterns/adapter.pattern";
-import {AbstractImplementer, FirstImplementation, Implementer, SecondImplementation} from "./patterns/bridge.pattern";
-import {FirstDecorator, SecondDecorator, SimpleComponent} from "./patterns/decorator.pattern";
-import {Facade, FirstComponent, SecondComponent} from "./patterns/facade.pattern";
-import {FirstHandler, SecondHandler, ThirdHandler} from "./patterns/chain.pattern";
+import {SingletonPattern} from "./patterns/creational/singleton.pattern";
+import {FactoryExample} from "./patterns/creational/factory.pattern";
+import {FactoryCreator} from "./patterns/creational/abstract-factory.pattern";
+import {BuilderPattern, Director} from "./patterns/creational/builder.pattern";
+import {AdapterPattern, Handler, NotStandard, Standard} from "./patterns/structural/adapter.pattern";
+import {AbstractImplementer, FirstImplementation, Implementer, SecondImplementation} from "./patterns/structural/bridge.pattern";
+import {FirstDecorator, SecondDecorator, SimpleComponent} from "./patterns/structural/decorator.pattern";
+import {Facade, FirstComponent, SecondComponent} from "./patterns/structural/facade.pattern";
+import {FirstHandler, SecondHandler, ThirdHandler} from "./patterns/behavioral/chain.pattern";
+import {LinkedObject, Prototype} from "./patterns/creational/prototype.pattern";
 
 async function bootstrap() {
         //TODO Singleton programming pattern
@@ -105,6 +106,18 @@ async function bootstrap() {
         console.log(handleResult2);
         console.log();
 
+        //TODO Prototype programming pattern
+        console.log(`Prototype pattern: `);
+        const prototype = new Prototype();
+        prototype.firstField = 0;
+        prototype.secondField = new Date();
+        prototype.thirdField = new LinkedObject(prototype);
+        const clone = prototype.clone();
+        console.log('prototype.firstField === clone.firstField: ' + (prototype.firstField === clone.firstField));
+        console.log('prototype.secondField === clone.secondField: ' + (prototype.secondField === clone.secondField));
+        console.log('prototype.thirdField === clone.thirdField: ' + (prototype.thirdField === clone.thirdField));
+        console.log('prototype.thirdField.prototype === clone.thirdField.prototype: ' + (prototype.thirdField.link === clone.thirdField.link));
+        console.log();
 
 }
 bootstrap();
