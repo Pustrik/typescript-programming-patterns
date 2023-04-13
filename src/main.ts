@@ -5,6 +5,8 @@ import {BuilderPattern, Director} from "./patterns/builder.pattern";
 import {AdapterPattern, Handler, NotStandard, Standard} from "./patterns/adapter.pattern";
 import {AbstractImplementer, FirstImplementation, Implementer, SecondImplementation} from "./patterns/bridge.pattern";
 import {FirstDecorator, SecondDecorator, SimpleComponent} from "./patterns/decorator.pattern";
+import {Facade, FirstComponent, SecondComponent} from "./patterns/facade.pattern";
+import {FirstHandler, SecondHandler, ThirdHandler} from "./patterns/chain.pattern";
 
 async function bootstrap() {
         //TODO Singleton programming pattern
@@ -78,6 +80,31 @@ async function bootstrap() {
         const decorator2 = new SecondDecorator(decorator1);
         console.log(decorator1.operation());
         console.log(decorator2.operation());
+        console.log();
+
+        //TODO Facade programming pattern
+        console.log(`Facade pattern: `);
+        const component1 = new FirstComponent();
+        const component2 = new SecondComponent();
+        const facade = new Facade(component1, component2);
+        console.log(facade.operation1());
+        console.log(facade.operation2());
+        console.log();
+
+        //TODO Chain programming pattern
+        console.log(`Chain pattern: `);
+        const forThird = 'For third';
+        const forFirst = 'For first';
+        const firstHandler = new FirstHandler();
+        const secondHandler = new SecondHandler();
+        const thirdHandler = new ThirdHandler();
+        firstHandler.setNext(secondHandler).setNext(thirdHandler);
+        const handleResult1 = firstHandler.handle(forThird);
+        const handleResult2 = firstHandler.handle(forFirst);
+        console.log(handleResult1);
+        console.log(handleResult2);
+        console.log();
+
 
 }
 bootstrap();
